@@ -62,15 +62,8 @@ sleep 3
 printf  "\n $(tput bold)Step 5: Download and prepare Contrail Command parameters.$(tput sgr0)\n" 
 cd ~/
 printf "Downloading YAML file command_servers.yml from Gihub and copy it to ~/ or /home/"
-wget -quiet https://raw.githubusercontent.com/cakkac/contrail/master/command_servers.yml
-file="~/command_servers.yml"
-if [ -f "$file" ]
-then
-	echo "$file downloaded."
-else
-	echo "$file not found."
-    break
-fi
+wget https://raw.githubusercontent.com/cakkac/contrail/master/command_servers.yml
+
 printf "\n Edit server parameters. \n"
 sed -i -e 's/'Server1IP'/'"$NewServer1IP"'/g' ~/command_servers.yml
 printf "##### IP@ done! #####"
