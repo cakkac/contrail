@@ -15,13 +15,12 @@ printf "Repository hub.juniper.net Authentication \n"
 read -p 'Username: ' CONTAINER_REGISTRY_USERNAME
 read -sp 'Password: ' CONTAINER_REGISTRY_PASSWORD
 echo
-echo you entered the following credentials: $CONTAINER_REGISTRY_USERNAME / $CONTAINER_REGISTRY_PASSWORD (be careful, no syntax verification is done)
 
 # retrieve parameters about the server
 printf "Server details for Contrail Command installation (Mandatory to fill them): \n"
 printf "login to run this shell should be root :) \n"
 read -p 'IP@ or FQDN : ' new-server1-ip
-read -sp 'NTP server IP@/FQDN (you can use public : 0.pool.ntp.org): ' new-ntp-server
+read -p 'NTP server IP@/FQDN (you can use public : 0.pool.ntp.org): ' new-ntp-server
 
 # Login/pwd on the server should be root/c0ntrail123 - not mandatory for Contrail Command installation but for Contrail Networking..
 # Allow Root login via SSH
@@ -51,12 +50,16 @@ sleep 3
 
 # get and edit command_servers.yml file to reflect the user entered data
 cd ~/
-echo "Get the reference file from Gihub and copy it to ~/ or /home/ 'wget https://github.com/cakkac/contrail/raw/master/command_servers.yml' \r"
-printf "Edit server parameters. \n"
+echo "Get the reference file from Gihub and copy it to ~/ or /home/ 'wget https://raw.githubusercontent.com/cakkac/contrail/master/command_servers.yml'"
+printf "\n Edit server parameters. \n"
 sed -i "s/^$server1-ip.*/$new-server1-ip/" ~/command_servers.yml
+printf "##### IP@ done! #####"
 sed -i "s/^$nep-server.*/$new-ntp-server/" ~/command_servers.yml
+printf "NTP Server set! #####"
 sed -i "s/^$container_reg_user.*/$CONTAINER_REGISTRY_USERNAME/" ~/command_servers.yml
+printf " Registry user set! #####"
 sed -i "s/^$container_reg_pwd.*/$CONTAINER_REGISTRY_PASSWORD/" ~/command_servers.yml
+printf " Registry Pasword set! ##### \n ______ Settings completed!______ "
 
 echo "\n human verification 'cat ~/command_servers.yml | grep "ip:|container_registry|ntpserver"'"
 sleep 3
