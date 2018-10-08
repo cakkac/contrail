@@ -15,20 +15,19 @@
 
 # retrieve login/pwd for hub.juniper.net
 clear
-printf "s//$(tput setaf 2)/g"
-printf "\e[1m Repository hub.juniper.net Authentication \e[21 \n"
-printf "\e[4m Username: "
-read -p CONTAINER_REGISTRY_USERNAME
+printf "$(tput setaf 2)_____________Welcome to Contrail Command Installation script___________________ $(tput sgr0)"
+printf "$(tput bold)Step 1: Repository hub.juniper.net Authentication $(tput sgr0)\n"
+printf "Username: "
+read -r -e -p "" CONTAINER_REGISTRY_USERNAME
 printf "\n Password: \e[24m"
-read -p CONTAINER_REGISTRY_PASSWORD
+read -r -e -p "" CONTAINER_REGISTRY_PASSWORD
 echo "\n"
 
 
 # retrieve parameters about the server
-printf "\e[1m Server details for Contrail Command installation (Mandatory to fill them): \n"
-printf "login to run this shell should be root :) \e[21 \n"
-read -p 'Server IP@ or FQDN : ' NewServer1IP
-read -e -p 'NTP server IP@/FQDN (keep the following value or delete & replace with another IP/FQDN): ' -i "0.pool.ntp.org" NewNTPServer
+printf "$(tput bold)Step 2: Server details for Contrail Command installation (Mandatory to fill them):$(tput sgr0)\n"
+read -r -e -p 'Server IP@ or FQDN : ' NewServer1IP
+read -r -e -p 'NTP server IP@/FQDN (keep the following value or delete & replace with another IP/FQDN): ' -i "0.pool.ntp.org" NewNTPServer
 
 
 # Login/pwd on the server should be root/c0ntrail123 - not mandatory for Contrail Command installation but for Contrail Networking..
@@ -80,8 +79,9 @@ sleep 2
 echo "$(tput el 1)"
 printf "______ Settings completed!______\n"
 
-echo "\n human verification of Server settings \n"
+echo "\n Human verification of Server settings \n"
 echo 'grep -E 'ip:|container_registry|ntpserver' ~/command_servers.yml'
+echo "if any settings is not at your convenience then break here (CTRL+C) and rerun..."
 sleep 3
 
 
