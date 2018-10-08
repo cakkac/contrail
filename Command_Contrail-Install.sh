@@ -53,14 +53,14 @@ cd ~/
 printf "Downloading YAML file Command_Servers.yml from Gihub and copy it to ~/ or /home/"
 wget https://raw.githubusercontent.com/cakkac/contrail/master/command_servers.yml
 printf "\n Edit server parameters. \n"
-sed -i "s/^$Server1IP.*/$NewServer1IP/" ~/command_servers.yml
+sed -i -e 's/'Server1IP'/'"$NewServer1IP"'/g' ~/command_servers.yml
 printf "##### IP@ done! #####"
-sed -i "s/^$NTPServer.*/$NewNTPServer/" ~/command_servers.yml
+sed -i -e 's/'NTPServer'/'"$NewNTPServer"'/g' ~/command_servers.yml
 printf "NTP Server set! #####"
-sed -i "s/^$container_reg_user.*/$CONTAINER_REGISTRY_USERNAME/" ~/command_servers.yml
+sed -i -e 's/'container_reg_user'/'"$CONTAINER_REGISTRY_USERNAME"'/g' ~/command_servers.yml
 printf " Registry user set! #####"
-sed -i "s/^$container_reg_pwd.*/$CONTAINER_REGISTRY_PASSWORD/" ~/command_servers.yml
-printf " Registry Pasword set! ##### \n ______ Settings completed!______ "
+sed -i -e 's/'container_reg_pwd'/'"$CONTAINER_REGISTRY_PASSWORD"'/g' ~/command_servers.yml
+printf " Registry Pasword set! ##### \n ______ Settings completed!______\n"
 
 echo "\n human verification 'cat ~/command_servers.yml | grep "ip:|container_registry|ntpserver"'"
 sleep 3

@@ -2,12 +2,12 @@
 # server1 ip@, ntp server and contrail registry credential have to be completed
 command_servers:
     server1:
-        ip: $Server1IP
+        ip: Server1IP
         connection: ssh
         ssh_user: root
         ssh_pass: c0ntrail123
         sudo_pass: c0ntrail123
-        ntpserver: $NTPServer
+        ntpserver: NTPServer
 
      # Specify either container_path
        #container_path: /root/contrail-command-051618.tar
@@ -16,8 +16,8 @@ command_servers:
         container_registry: hub.juniper.net/contrail
         container_name: contrail-command
         container_tag: 5.0.1-0.214
-        container_registry_username: $container_reg_user
-        container_registry_password: $container_reg_pwd
+        container_registry_username: container_reg_user
+        container_registry_password: container_reg_pwd
         config_dir: /etc/contrail
 
         # contrail command container configurations given here go to /etc/contrail/contrail.yml
