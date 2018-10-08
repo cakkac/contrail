@@ -43,7 +43,7 @@ read -r -e -p 'NTP server IP@/FQDN (keep the following value or delete & replace
 
 printf  "\n $(tput bold)Step3: Installation of necesseary packages (Docker ""entre autres"").$(tput sgr0)\n"
 printf  "Operational Internet Access is needed.\n"
-read -r -p "Wait 5 seconds or press any key to continue immediately \n" -t 5 -n 1 -s
+read -r -p "Wait 5 seconds or press any key to continue immediately" -t 5 -n 1 -s
 # Example of multiple action with pause: sleep 5 && cd /var/www/html && git pull && sleep 3 && cd ..
 
 yum install -y yum-utils device-mapper-persistent-data lvm2
@@ -86,7 +86,7 @@ printf "______ Settings completed!______\n"
 printf "\n Human verification of Server settings \n"
 grep -E 'ip:|container_registry|ntpserver' ~/command_servers.yml
 echo "if any settings is not at your convenience then break here (CTRL+C) and rerun..."
-sleep 3
+read -r -p "Press any key to continue immediately" -n 1 -s
 
 
 #deploy Contrail Command only
@@ -94,7 +94,7 @@ printf "\n Ansible playbook for Contrail Command started"
 docker run -t --net host -v ~/command_servers.yml:/command_servers.yml -d --privileged --name contrail_command_deployer hub.juniper.net/contrail/contrail-command-deployer:5.0.1-0.214
 
 printf "\n Command Contrail installation in progress:"
-docker logs -f contrail_command_deployer
+docker logs -f contrail_command_deployer > ~/contrail_command_deployer.log
 
 printf "\n Contrail Command accessible: "
 echo "https://"$NewServer1IP":9091"
