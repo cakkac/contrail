@@ -14,12 +14,14 @@
 
 
 # retrieve login/pwd for hub.juniper.net
+clear
+printf "s//$(tput setaf 2)/g"
 printf "\e[1m Repository hub.juniper.net Authentication \e[21 \n"
 printf "\e[4m Username: "
 read -p CONTAINER_REGISTRY_USERNAME
 printf "\n Password: \e[24m"
 read -p CONTAINER_REGISTRY_PASSWORD
-echo
+echo "\n"
 
 
 # retrieve parameters about the server
@@ -62,12 +64,21 @@ wget https://raw.githubusercontent.com/cakkac/contrail/master/command_servers.ym
 printf "\n Edit server parameters. \n"
 sed -i -e 's/'Server1IP'/'"$NewServer1IP"'/g' ~/command_servers.yml
 printf "##### IP@ done! #####"
+sleep 2
+echo "$(tput el 1)"
 sed -i -e 's/'NTPServer'/'"$NewNTPServer"'/g' ~/command_servers.yml
 printf "NTP Server set! #####"
+sleep 2
+echo "$(tput el 1)"
 sed -i -e 's/'container_reg_user'/'"$CONTAINER_REGISTRY_USERNAME"'/g' ~/command_servers.yml
 printf " Registry user set! #####"
+sleep 2
+echo "$(tput el 1)"
 sed -i -e 's/'container_reg_pwd'/'"$CONTAINER_REGISTRY_PASSWORD"'/g' ~/command_servers.yml
-printf " Registry Pasword set! ##### \n ______ Settings completed!______\n"
+printf " Registry Pasword set! #####"
+sleep 2
+echo "$(tput el 1)"
+printf "______ Settings completed!______\n"
 
 echo "\n human verification of Server settings \n"
 echo 'grep -E 'ip:|container_registry|ntpserver' ~/command_servers.yml'
