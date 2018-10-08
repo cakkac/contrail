@@ -72,3 +72,4 @@ docker run -t --net host -v ~/command_servers.yml:/command_servers.yml -d --priv
 
 
 Echo "\n Command Contrail installation in progress: 'docker logs -f contrail_command_deployer'"
+docker logs -f contrail_command_deployer
