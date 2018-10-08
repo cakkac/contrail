@@ -50,7 +50,8 @@ sleep 3
 
 # get and edit command_servers.yml file to reflect the user entered data
 cd ~/
-echo "Get the reference file from Gihub and copy it to ~/ or /home/ 'wget https://raw.githubusercontent.com/cakkac/contrail/master/command_servers.yml'"
+printf "Downloading YAML file Command_Servers.yml from Gihub and copy it to ~/ or /home/"
+wget https://raw.githubusercontent.com/cakkac/contrail/master/command_servers.yml
 printf "\n Edit server parameters. \n"
 sed -i "s/^$server1-ip.*/$new-server1-ip/" ~/command_servers.yml
 printf "##### IP@ done! #####"
