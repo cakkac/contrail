@@ -21,7 +21,7 @@ printf "$(tput setaf 2)_____________Welcome to Contrail Command Installation scr
 printf "$(tput bold)Step 1: Repository hub.juniper.net Authentication $(tput sgr0)\n"
 printf "Username: "
 read -r -e -p "" CONTAINER_REGISTRY_USERNAME
-printf "\n Password: \e[24m"
+printf "\n Password: "
 read -r -e -p "" CONTAINER_REGISTRY_PASSWORD
 
 
@@ -46,7 +46,6 @@ printf  "Operational Internet Access is needed.\n"
 read -r -p "Wait 5 seconds or press any key to continue immediately \n" -t 5 -n 1 -s
 # Example of multiple action with pause: sleep 5 && cd /var/www/html && git pull && sleep 3 && cd ..
 
-@echo off
 yum install -y yum-utils device-mapper-persistent-data lvm2
 yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
 yum install -y docker-ce
@@ -76,19 +75,19 @@ printf "\n Edit server parameters. \n"
 sed -i -e 's/'Server1IP'/'"$NewServer1IP"'/g' ~/command_servers.yml
 printf "##### IP@ done! #####"
 sleep 2
-echo "$(tput el 1)"
+echo -e "\033[2K"
 sed -i -e 's/'NTPServer'/'"$NewNTPServer"'/g' ~/command_servers.yml
 printf "NTP Server set! #####"
 sleep 2
-echo "$(tput el 1)"
+echo -e "\033[2K"
 sed -i -e 's/'container_reg_user'/'"$CONTAINER_REGISTRY_USERNAME"'/g' ~/command_servers.yml
 printf " Registry user set! #####"
 sleep 2
-echo "$(tput el 1)"
+echo -e "\033[2K"
 sed -i -e 's/'container_reg_pwd'/'"$CONTAINER_REGISTRY_PASSWORD"'/g' ~/command_servers.yml
 printf " Registry Pasword set! #####"
 sleep 2
-echo "$(tput el 1)"
+echo -e "\033[2K"
 printf "______ Settings completed!______\n"
 
 printf "\n Human verification of Server settings \n"
@@ -101,8 +100,8 @@ sleep 3
 printf "\n Ansible playbook for Contrail Command started"
 docker run -t --net host -v ~/command_servers.yml:/command_servers.yml -d --privileged --name contrail_command_deployer hub.juniper.net/contrail/contrail-command-deployer:5.0.1-0.214
 
-echo "\n Command Contrail installation in progress:"
+printf "\n Command Contrail installation in progress:"
 docker logs -f contrail_command_deployer
 
-echo "\n Contrail Command accessible: "
+printf "\n Contrail Command accessible: "
 echo "https://"$NewServer1IP":9091"
