@@ -62,7 +62,8 @@ printf " Registry user set! #####"
 sed -i -e 's/'container_reg_pwd'/'"$CONTAINER_REGISTRY_PASSWORD"'/g' ~/command_servers.yml
 printf " Registry Pasword set! ##### \n ______ Settings completed!______\n"
 
-echo "\n human verification 'cat ~/command_servers.yml | grep "ip:|container_registry|ntpserver"'"
+echo "\n human verification of Server settings \n"
+echo 'grep -E 'ip:|container_registry|ntpserver' ~/command_servers.yml'
 sleep 3
 
 
@@ -71,5 +72,5 @@ printf "\n Ansible playbook for Contrail Command started"
 docker run -t --net host -v ~/command_servers.yml:/command_servers.yml -d --privileged --name contrail_command_deployer hub.juniper.net/contrail/contrail-command-deployer:5.0.1-0.214
 
 
-Echo "\n Command Contrail installation in progress: 'docker logs -f contrail_command_deployer'"
+Echo "\n Command Contrail installation in progress:"
 docker logs -f contrail_command_deployer
