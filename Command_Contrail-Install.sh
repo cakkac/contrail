@@ -19,8 +19,8 @@ echo
 # retrieve parameters about the server
 printf "Server details for Contrail Command installation (Mandatory to fill them): \n"
 printf "login to run this shell should be root :) \n"
-read -p 'IP@ or FQDN : ' new-server1-ip
-read -p 'NTP server IP@/FQDN (you can use public : 0.pool.ntp.org): ' new-ntp-server
+read -p 'IP@ or FQDN : ' NewServer1IP
+read -p 'NTP server IP@/FQDN (you can use public : 0.pool.ntp.org): ' NewNTPServer
 
 # Login/pwd on the server should be root/c0ntrail123 - not mandatory for Contrail Command installation but for Contrail Networking..
 # Allow Root login via SSH
@@ -53,9 +53,9 @@ cd ~/
 printf "Downloading YAML file Command_Servers.yml from Gihub and copy it to ~/ or /home/"
 wget https://raw.githubusercontent.com/cakkac/contrail/master/command_servers.yml
 printf "\n Edit server parameters. \n"
-sed -i "s/^$server1-ip.*/$new-server1-ip/" ~/command_servers.yml
+sed -i "s/^$Server1IP.*/$NewServer1IP/" ~/command_servers.yml
 printf "##### IP@ done! #####"
-sed -i "s/^$nep-server.*/$new-ntp-server/" ~/command_servers.yml
+sed -i "s/^$NTPServer.*/$NewNTPServer/" ~/command_servers.yml
 printf "NTP Server set! #####"
 sed -i "s/^$container_reg_user.*/$CONTAINER_REGISTRY_USERNAME/" ~/command_servers.yml
 printf " Registry user set! #####"

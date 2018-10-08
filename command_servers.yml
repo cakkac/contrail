@@ -2,12 +2,12 @@
 # server1 ip@, ntp server and contrail registry credential have to be completed
 command_servers:
     server1:
-        ip: $server1-ip
+        ip: $Server1IP
         connection: ssh
         ssh_user: root
         ssh_pass: c0ntrail123
         sudo_pass: c0ntrail123
-        ntpserver: $ntp-server
+        ntpserver: $NTPServer
 
      # Specify either container_path
        #container_path: /root/contrail-command-051618.tar
